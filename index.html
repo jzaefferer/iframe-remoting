@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<meta charset=utf-8 />
+<title>iframe-remoting - nothing loaded, yet</title>
+<script type="text/javascript">
+	$(function() {
+		
+		var frame = $("#frame"),
+			lastTimestamp;
+
+		function request() {
+			$.getJSON("controller.php", { timestamp: lastTimestamp }, function(response) {
+				if (response) {
+					document.title = "loaded " + response.url;
+					lastTimestamp = response.lastTimestamp;
+					frame.attr("src", response.url);
+				}
+				setTimeout(request, 5000);
+			});
+		}
+		request();
+	});
+</script>
+<style type="text/css">
+	html, body, #frame { margin: 0; padding: 0; width: 100%; height: 100%; }
+	#frame { border: none; }
+</style>
+</head>
+<body>
+	<iframe id="frame" width="100%" height="100%" style="border:none"></iframe>
+</body>
+</html>

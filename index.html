@@ -11,13 +11,20 @@
 			lastTimestamp;
 
 		function request() {
-			$.getJSON("controller.php", { timestamp: lastTimestamp }, function(response) {
-				if (response) {
+			$.ajax({
+				url: "controller.php",
+				dataType: "json",
+				data: {
+					lastTimestamp: lastTimestamp
+				},
+				success: function(response){
 					document.title = "loaded " + response.url;
 					lastTimestamp = response.lastTimestamp;
 					frame.attr("src", response.url);
+				},
+				complete: function() {
+					setTimeout(request, 5000);
 				}
-				setTimeout(request, 5000);
 			});
 		}
 		request();

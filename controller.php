@@ -58,8 +58,19 @@ function array_to_json( $array ){
     return $result;
 }
 
+$urls = file("urls.txt");
+if (!$urls) {
+	die("error: no urls.txt found or no content");
+}
+
+$modified = filemtime("urls.txt");
+if ($modified == $_GET['lastTimestamp']) {
+	// TODO send appropiate header instead
+	die("error");
+}
+
 $response = array();
-$response['lastTimestamp'] = 123;
-$response['url'] = "http://google.com";
+$response['lastTimestamp'] = $modified;
+$response['url'] = trim($urls[0]);
 echo array_to_json($response);
 ?>

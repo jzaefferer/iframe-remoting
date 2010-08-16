@@ -5,4 +5,8 @@ Usage
 
 Create a file urls.txt and input one or more URLs. Point a HTTP server to the project and let clients load it (eg. /iframe-remoting/).
 
+	http://swarm.jquery.org/run/remote
+	http://jquery.com
+	
+
 Use /admin.php to load other URLs (interface for modifying urls.txt). Open /controller.php for debugging.  

@@ -57,7 +57,10 @@ function array_to_json( $array ){
 
     return $result;
 }
-
+if (!file_exists("urls.txt")) {
+	header("HTTP/1.1 500 BAAAD");
+	die();
+}
 $urls = file("urls.txt");
 if (!$urls) {
 	die("error: no urls.txt found or no content");

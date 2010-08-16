@@ -1,4 +1,7 @@
 <?php 
+if (!file_exists("urls.txt")) {
+	file_put_contents("urls.txt", "http://example.com\n");
+}
 $urls = file("urls.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 if (isset($_POST['url'])) {
 	array_unshift($urls, $_POST['url']);

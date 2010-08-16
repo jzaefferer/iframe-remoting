@@ -22,6 +22,9 @@
 					lastTimestamp = response.lastTimestamp;
 					frame.attr("src", response.url);
 				},
+				error: function() {
+					document.title = "loading failed, no urls configured?";
+				},
 				complete: function() {
 					setTimeout(request, 5000);
 				}
